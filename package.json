@@ -10,6 +10,7 @@
     "import": "./dist/index.js"
   },
   "scripts": {
+    "prepublishOnly": "pnpm -s build",
     "build": "rimraf dist && tsup",
     "dev": "rimraf dist && tsup --watch --sourcemap"
   },
