@@ -1,12 +1,8 @@
 import { Plugin } from 'esbuild';
-import * as _ from 'lodash-es'
+import * as _ from 'radashi'
 import path from 'path';
-import { NormalizedReadResult, readPackageUp } from 'read-pkg-up'
-import normalize from 'normalize-package-data'
-import type { PackageJson } from 'type-fest'
+import { NormalizedReadResult, readPackageUp, NormalizedPackageJson } from 'read-pkg-up'
 import fs from 'fs'
-type Package = normalize.Package
-type NormalizedPackageJson = Package & PackageJson
 
 type NotNill<T> = T extends null | undefined ? never : T;
 
@@ -46,7 +42,7 @@ export interface Options {
 }
 
 export const defaultOptions: DeepRequired<Options> = {
-  banner: `/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */`,
+  banner: `/*! {{name}} v{{version}} | {{license}} */`,
   thirdParty: {
     includePrivate: false,
     output: {
@@ -85,7 +81,7 @@ export default function esbuildPluginLicense(options: Options = {}): Plugin {
       userBanner = userBanner ? (userBanner + '\n') : ''
       build.initialOptions.banner = {
         ...build.initialOptions.banner,
-        js: userBanner + _.template(banner)({ pkg: pkg?.packageJson })
+        js: userBanner + _.template(banner, { pkg: pkg?.packageJson })
       }
 
       build.onLoad({ filter: /.*/ }, async (args) => {
@@ -129,7 +125,7 @@ export default function esbuildPluginLicense(options: Options = {}): Plugin {
 
         let thirdPartyLicenseResult = ''
         if (typeof outputTemplate === 'string') {
-          thirdPartyLicenseResult = _.template(outputTemplate)(dependencies)
+          thirdPartyLicenseResult = _.template(outputTemplate, dependencies)
         } else {
           thirdPartyLicenseResult = outputTemplate(dependencies, {
             packageJson: pkg!.packageJson,
