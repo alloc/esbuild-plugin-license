@@ -1,7 +1,7 @@
 {
   "name": "@alloc/esbuild-plugin-license",
   "type": "module",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "description": "esbuild plugin for generating license for your bundle",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
