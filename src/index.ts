@@ -133,6 +133,7 @@ export default function esbuildPluginLicense(options: Options = {}): Plugin {
           })
         }
         if (thirdPartyLicenseResult) {
+          fs.mkdirSync(path.dirname(outputFile), { recursive: true })
           fs.writeFileSync(outputFile, thirdPartyLicenseResult, {
             encoding: 'utf-8'
           })
