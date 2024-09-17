@@ -1,5 +1,5 @@
 {
-  "name": "esbuild-plugin-license",
+  "name": "@alloc/esbuild-plugin-license",
   "type": "module",
   "version": "1.2.3",
   "description": "esbuild plugin for generating license for your bundle",
@@ -22,10 +22,10 @@
   ],
   "author": "Yiming Li",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/upupming/esbuild-plugin-license/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alloc/esbuild-plugin-license.git"
   },
-  "homepage": "https://github.com/upupming/esbuild-plugin-license#readme",
   "devDependencies": {
     "@types/node": "22.5.5",
     "esbuild": "0.23.1",
